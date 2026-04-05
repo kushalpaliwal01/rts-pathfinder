@@ -1,6 +1,6 @@
 #include "tileset.h"
 
-TileSet::TileSet(int elevatedValue, int targetValue) : ELEVATED(elevatedValue), TARGET(targetValue) {}
+TileSet::TileSet() {}
 
 int TileSet::getGroundValue() const {
     return GROUND;
@@ -8,12 +8,4 @@ int TileSet::getGroundValue() const {
 
 int TileSet::getStartValue() const {
     return START;
-}
-
-int TileSet::getElevatedValue() const {
-    return ELEVATED;
-}
-
-int TileSet::getTargetValue() const {
-    return TARGET;
 }

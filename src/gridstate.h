@@ -1,10 +1,14 @@
 #ifndef GRIDSTATE_H
 #define GRIDSTATE_H
 
-class GridState
+#include <QObject>
+#include "types.h"
+
+class GridState : public QObject
 {
+    Q_OBJECT
 public:
-    GridState();
+    explicit GridState(QObject *parent = nullptr);
 };
 
 #endif // GRIDSTATE_H

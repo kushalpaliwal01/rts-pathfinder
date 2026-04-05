@@ -20,7 +20,12 @@ qt_add_qml_module(appPathFinder
         SOURCES src/gridstate.h src/gridstate.cpp
         SOURCES src/pathfinder.h src/pathfinder.cpp
         SOURCES src/tileset.h src/tileset.cpp
+        SOURCES tilesets/woodlandtileset.h tilesets/woodlandtileset.cpp
+        SOURCES include/types.h
 )
+
+target_include_directories(appPathFinder PRIVATE src tilesets)
+target_include_directories(appPathFinder PRIVATE src include)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

@@ -1,3 +1,3 @@
 #include "gridstate.h"
 
-GridState::GridState() {}
+GridState::GridState (QObject *parent): QObject(parent) {}
