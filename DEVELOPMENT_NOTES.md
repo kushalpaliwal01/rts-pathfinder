@@ -66,12 +66,19 @@ with the elevated tile value, then flattens the 2D grid into a QVariantList wher
 QML with a cellschanged signal so QML automatically re-renders when data updates.
 * Main.qml: renders the grid driven by the GameController's cells property. Each cell is a Rectangle colored based on its type — white (ground),
 black (elevated/wall), blue (path), green (start), red (target).
+* PathFinder: Extended the previous version to handle multiple start and target positions. The start positions are mapped to the target position with
+the closest manhatten distance. If two start positions map to the same target position the second start position would acquire one of the four cells
+adjacent to the target cell. If no such cells exist a warning is sent to the user. The path for each start to target position is generated sequentially
+and the exact path is added to the reservation table with the row, col, timestep value. so that if another start position cannot acquire a cell at a certain
+timestep when another start position or battle unit has already acquired so it is considered as an unoccupiable cell. 
+
 
 ### Revised Decisions
 * TileSet abstraction removed and replaced with IconSet, a simple constant class since the original decision was based up on different icon sets having
 different tile values requiring a factory pattern however, examining the sample data showed that the variation was (8.1, 8.2, 8.3) which is already resolved
 with flooring
 * GridState is not used as a QML bridge anymore and is just used as a pure data store 
+* For handling multiple start and target positions I used cooperative A* algorithm which is near optimal. 
 
 ### Next Steps
 * Multi unit support: I need to extend the ParseResult to hold multiple start and multiple target positions. One thing I need to decide upon is

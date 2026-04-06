@@ -9,7 +9,7 @@
 
 JsonParser::JsonParser() {}
 
-ParseResult JsonParser::parseJson(std::string filePath) {
+ParseResult JsonParser::parseJson(const std::string& filePath) {
     QFile file(QString::fromStdString(filePath));
 
     // If file failed to open return an empty grid
@@ -56,10 +56,10 @@ ParseResult JsonParser::parseJson(std::string filePath) {
             int value = (int)std::floor(gridData[dataIndex].toDouble());
             grid[i][j] = value;
             if (value == IconSet::TARGET) {
-                result.targetPosition = {i, j};
+                result.targetPositions.push_back({i, j});
             }
             else if (value == IconSet::START) {
-                result.startPosition = {i, j};
+                result.startPositions.push_back({i, j});
             }
             dataIndex++;
         }

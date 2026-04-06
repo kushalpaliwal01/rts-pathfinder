@@ -11,7 +11,7 @@ class JsonParser
 
 public:
     JsonParser();
-    ParseResult parseJson(std::string filePath);
+    ParseResult parseJson(const std::string& filePath);
 
 
 };

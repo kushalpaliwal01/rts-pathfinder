@@ -12,8 +12,8 @@
 **/
 struct ParseResult {
     std::vector<std::vector<int>> grid;
-    std::pair<int, int> startPosition;
-    std::pair<int, int> targetPosition;
+    std::vector<std::pair<int, int>> startPositions;
+    std::vector<std::pair<int, int>> targetPositions;
 };
 
 #endif // TYPES_H

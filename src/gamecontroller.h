@@ -20,7 +20,7 @@ signals:
 
 private:
     QVariantList m_cells;
-    void buildCellList(const ParseResult& result, const std::vector<std::pair<int,int>>& path);
+    void buildCellList(const ParseResult& result, const std::vector<std::vector<std::pair<int,int>>>& allPaths);
 };
 
 #endif

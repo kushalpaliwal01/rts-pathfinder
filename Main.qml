@@ -24,6 +24,7 @@ Window {
                     if (modelData === 2) return "blue"    // path
                     if (modelData === 3) return "green"   // start
                     if (modelData === 4) return "red"     // target
+                    if (modelData === 5) return "yellow"
                     return "white"
                 }
             }
