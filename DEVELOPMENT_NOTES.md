@@ -53,3 +53,28 @@ A* algorithm would naturally return one path and the tie breaking would work imp
 rendering offset from the tileset where the decimal represents the sub tile variant. I made the decision to floor the float values to
 integers before operating on the values, treating 8.1 as 8 which is the target tile value and 0.5 as -1 for the single battle unit case since it
 doesn't match any known tile type after flooring except in the case of multiple battle units starting position. 
+
+## Implementation Update
+
+### Completed
+* JsonParser: parses the RiskyLab compatible Json file and builds a 2d grid and detects start and target positions and packages this in a struct
+called ParseResult
+* PathFinder: A* with Manhatten distance heurisitics, and implemented a lazy detection using closed set and finally a parent map for reconstructing
+the path from the starting position to the target position
+* GameController: acts as the bridge between the C++ backend and QML frontend. Calls JsonParser to parse the map, passes the result to PathFinder
+with the elevated tile value, then flattens the 2D grid into a QVariantList where each cell is assigned a type integer. Exposes this list to the 
+QML with a cellschanged signal so QML automatically re-renders when data updates.
+* Main.qml: renders the grid driven by the GameController's cells property. Each cell is a Rectangle colored based on its type — white (ground),
+black (elevated/wall), blue (path), green (start), red (target).
+
+### Revised Decisions
+* TileSet abstraction removed and replaced with IconSet, a simple constant class since the original decision was based up on different icon sets having
+different tile values requiring a factory pattern however, examining the sample data showed that the variation was (8.1, 8.2, 8.3) which is already resolved
+with flooring
+* GridState is not used as a QML bridge anymore and is just used as a pure data store 
+
+### Next Steps
+* Multi unit support: I need to extend the ParseResult to hold multiple start and multiple target positions. One thing I need to decide upon is
+a way to avoid collisions when the units move simultaneously and try to acquire the same tile. 
+* Improved UI: Currenlty the UI just shows the grid with the path and I would like to add a step through buttons that would allow the user to step
+to the next step using a button and verify the path. 

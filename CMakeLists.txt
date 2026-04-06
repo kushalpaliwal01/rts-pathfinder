@@ -10,21 +10,20 @@ qt_standard_project_setup(REQUIRES 6.10)
 
 qt_add_executable(appPathFinder
     main.cpp
+    src/jsonparser.h src/jsonparser.cpp
+    src/gridstate.h src/gridstate.cpp
+    src/pathfinder.h src/pathfinder.cpp
+    src/gamecontroller.h src/gamecontroller.cpp
+    include/iconset.h
+    include/types.h
 )
 
 qt_add_qml_module(appPathFinder
     URI PathFinder
     QML_FILES
         Main.qml
-        SOURCES src/jsonparser.h src/jsonparser.cpp
-        SOURCES src/gridstate.h src/gridstate.cpp
-        SOURCES src/pathfinder.h src/pathfinder.cpp
-        SOURCES src/tileset.h src/tileset.cpp
-        SOURCES tilesets/woodlandtileset.h tilesets/woodlandtileset.cpp
-        SOURCES include/types.h
 )
 
-target_include_directories(appPathFinder PRIVATE src tilesets)
 target_include_directories(appPathFinder PRIVATE src include)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

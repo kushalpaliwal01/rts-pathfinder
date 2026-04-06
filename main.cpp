@@ -1,6 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "src/jsonparser.h"
+#include "src/pathfinder.h"
+#include <src/gamecontroller.h>
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -14,13 +17,10 @@ int main(int argc, char *argv[])
         []() { QCoreApplication::exit(-1); },
         Qt::QueuedConnection);
 
-    // Debugging Code
-    JsonParser parser;
-    ParseResult result = parser.parseJson("/Users/kushal/Projects/PathFinder/sample.json");
-    qDebug() << "Rows:" << result.grid.size();
-    qDebug() << "Cols:" << result.grid[0].size();
-    qDebug() << "Start:" << result.startPosition.first << result.startPosition.second;
-    qDebug() << "Target:" << result.targetPosition.first << result.targetPosition.second;
+    GameController controller;
+    engine.rootContext()->setContextProperty("gameController", &controller);
+    controller.loadMap("/Users/kushal/Projects/PathFinder/sample.json");
+
 
     engine.loadFromModule("PathFinder", "Main");
 

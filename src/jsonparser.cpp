@@ -1,10 +1,11 @@
 #include "jsonparser.h"
-#include "woodlandtileset.h"
+#include "iconset.h"
 #include <QFile>
 #include <QJsonObject>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <cmath>
+#include <iostream>
 
 JsonParser::JsonParser() {}
 
@@ -44,9 +45,6 @@ ParseResult JsonParser::parseJson(std::string filePath) {
 
     int rows = canvasVals["height"].toInt() / firstIndexVal["tileheight"].toInt();
     int columns = canvasVals["width"].toInt() / firstIndexVal["tilewidth"].toInt();
-    std::string name = firstIndexVal["name"].toString().toStdString();
-
-    std::unique_ptr<TileSet> tileSet = createTileSet(name);
 
 
     ParseResult result;
@@ -57,10 +55,10 @@ ParseResult JsonParser::parseJson(std::string filePath) {
         for (int j = 0; j < columns; j++){
             int value = (int)std::floor(gridData[dataIndex].toDouble());
             grid[i][j] = value;
-            if (value == tileSet->getTargetValue()) {
+            if (value == IconSet::TARGET) {
                 result.targetPosition = {i, j};
             }
-            else if (value == tileSet->getStartValue()) {
+            else if (value == IconSet::START) {
                 result.startPosition = {i, j};
             }
             dataIndex++;
@@ -68,15 +66,8 @@ ParseResult JsonParser::parseJson(std::string filePath) {
     }
 
     result.grid = grid;
+    std::cout << "The total values are: " << dataIndex;
 
     return result;
 
-}
-
-std::unique_ptr<TileSet> JsonParser::createTileSet(const std::string& name) {
-    if (name.find("woodland") != std::string::npos) {
-        return std::make_unique<WoodLandTileSet>();
-    }
-
-    return std::make_unique<WoodLandTileSet>(); // default fallback for now
 }
