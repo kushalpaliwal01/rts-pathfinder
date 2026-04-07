@@ -71,6 +71,10 @@ the closest manhatten distance. If two start positions map to the same target po
 adjacent to the target cell. If no such cells exist a warning is sent to the user. The path for each start to target position is generated sequentially
 and the exact path is added to the reservation table with the row, col, timestep value. so that if another start position cannot acquire a cell at a certain
 timestep when another start position or battle unit has already acquired so it is considered as an unoccupiable cell. 
+* GridState: owns visual state (`m_cells, m_rows, m_columns, m_allPaths, m_currentStep`), handles step through logic via `advance()` and `buildBaseGrid()`
+* GameController: refactored it to purely coorindate between the frontend and the backend, and delegates all visualState to GridState.
+* QML UI: file picker via `FileDialog` step through button, run stop buttons and timer based animation. resizable grid with dynamic cellsize. 
+
 
 
 ### Revised Decisions
@@ -81,7 +85,13 @@ with flooring
 * For handling multiple start and target positions I used cooperative A* algorithm which is near optimal. 
 
 ### Next Steps
-* Multi unit support: I need to extend the ParseResult to hold multiple start and multiple target positions. One thing I need to decide upon is
-a way to avoid collisions when the units move simultaneously and try to acquire the same tile. 
-* Improved UI: Currenlty the UI just shows the grid with the path and I would like to add a step through buttons that would allow the user to step
-to the next step using a button and verify the path. 
+* Cleaning up the code to include comments wherever required and proper error handling. 
+* Rigorous testing to find more limitations of the multi unit code.
+
+### Known limitations
+* If let's say multiple start positions need to acquire the same target, my current code lets one unit acquire the target and the other units acquire the 
+adjacent cells but if no adjacent cells are free meaning they are either elevated terrain or occupied by other units then the path for that start unit
+will be skipped.
+* Since I am using Manhatten distance as a heuristic, it calculates the nearest target position to a start position but it has no idea about reachability.
+So if i have two start positions and two target positions. The Manhatted distance is used to map the start to the target. Let's say start 1 -> target 2 and 
+start 2 -> target 1 but if for both of these mapping no path exists because of unreachability my algorithm wont be able to handle that. 

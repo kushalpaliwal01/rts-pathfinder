@@ -19,9 +19,6 @@ int main(int argc, char *argv[])
 
     GameController controller;
     engine.rootContext()->setContextProperty("gameController", &controller);
-    controller.loadMap("/Users/kushal/Projects/PathFinder/sample.json");
-
-
     engine.loadFromModule("PathFinder", "Main");
 
     return QCoreApplication::exec();

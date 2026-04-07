@@ -39,6 +39,9 @@ private:
         int elevatedValue
     );
 
+    /**
+     * Function to calculate the nearest Target from a list of target positions from the starting position
+    **/
     std::pair<int, int> findNearestTarget(
         std::pair<int, int> startPosition,
         const std::vector<std::pair<int, int>>& targetPositions
@@ -57,8 +60,15 @@ private:
         std::pair<int, int> targetPosition
     );
 
+    /**
+     *  Function to iterate over the parent map which contains the positions a start position would neec to traverse to reach the
+     *  target position. This function is called for all the paths found for start -> target positions.
+    **/
     std::vector<std::pair<int, int>> backtrackParent(const std::map<std::pair<int, int>, std::pair<int, int>>& parent, std::pair<int, int> currentNodePos);
 
+    /**
+     *  Helper function to calculare the manhatten distance between two positions
+    **/
     int calculateManhattenDistance(std::pair<int, int> currentPos, std::pair<int, int> targetPos);
 
 };
