@@ -24,6 +24,13 @@ qt_add_qml_module(appPathFinder
         Main.qml
 )
 
+qt_add_resources(appPathFinder "images"
+    PREFIX "/"
+    FILES
+        images/gojo_chibi.jpeg
+        images/sukuna_chibi.jpeg
+)
+
 target_include_directories(appPathFinder PRIVATE src include)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

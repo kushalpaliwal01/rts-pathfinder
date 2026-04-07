@@ -5,7 +5,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <cmath>
-#include <iostream>
 #include <QDebug>
 
 JsonParser::JsonParser() {}
@@ -39,13 +38,17 @@ ParseResult JsonParser::parseJson(const std::string& filePath) {
         qWarning() << "Invalid JSON: no layers found";
         return {};
     }
-    QJsonObject layersObj = layers[0].toObject();
 
-    if (layersObj["name"] != "world"){
+    QJsonObject layersObj = layers[0].toObject();
+    if (layersObj["name"] != "world" && layers.size() > 1){
         layersObj = layers[1].toObject();
     }
 
     QJsonArray gridData = layersObj["data"].toArray();
+    if (gridData.isEmpty()) {
+        qWarning () << "Invalid JSON: layer has no data";
+        return {};
+    }
 
     // Extracting the image and tile height and width from the tilesets field of the json to determine the grid size
     QJsonArray tileSets = root["tilesets"].toArray();

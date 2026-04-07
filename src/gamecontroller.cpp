@@ -1,10 +1,9 @@
 #include "gamecontroller.h"
 #include "iconset.h"
-#include <set>
-#include <tuple>
 #include <QUrl>
 
 GameController::GameController(QObject *parent) : QObject(parent) {
+    // Forward GridState's cellChanged signal to QML via GameControllers own cellsChanged signal
     connect(&m_gridState, &GridState::cellsChanged, this, &GameController::cellsChanged);
 }
 
@@ -32,6 +31,10 @@ void GameController::loadMap(const QString& filePath) {
 
 void GameController::nextStep() {
     m_gridState.advance();
+}
+
+void GameController::previousStep() {
+    m_gridState.retreat();
 }
 
 int GameController::gridColumns() const {

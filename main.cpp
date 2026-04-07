@@ -1,7 +1,5 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "src/jsonparser.h"
-#include "src/pathfinder.h"
 #include <src/gamecontroller.h>
 #include <QQmlContext>
 
