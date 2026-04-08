@@ -101,45 +101,50 @@ Window {
                 anchors.margins: 16
                 spacing: 12
 
-                Button {
-                    text: "Load Map"
+                component StyledButton: Button {
                     Layout.fillWidth: true
                     implicitHeight: 40
-                    onClicked: fileDialog.open()
+
+                    contentItem: Text {
+                        text: parent.text
+                        color: "white"
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
+
+                    background: Rectangle {
+                        color: parent.pressed ? "#555555" : "#3c3c3c"
+                        radius: 4
+                    }
                 }
 
-                Button {
+                StyledButton {
+                    text: "Load Map"
+                    onClicked: { runTimer.stop(); fileDialog.open() }
+                }
+
+                StyledButton {
                     text: "Next Step"
-                    Layout.fillWidth: true
-                    implicitHeight: 40
                     onClicked: gameController.nextStep()
                 }
 
-                Button {
+                StyledButton {
                     text: "Previous Step"
-                    Layout.fillWidth: true
-                    implicitHeight: 40
                     onClicked: gameController.previousStep()
                 }
 
-                Button {
+                StyledButton {
                     text: "Run Forward"
-                    Layout.fillWidth: true
-                    implicitHeight: 40
-                    onClicked: {goingForward = true; runTimer.start()}
+                    onClicked: { goingForward = true; runTimer.start() }
                 }
 
-                Button {
+                StyledButton {
                     text: "Run Back"
-                    Layout.fillWidth: true
-                    implicitHeight: 40
-                    onClicked: {goingForward = false; runTimer.start()}
+                    onClicked: { goingForward = false; runTimer.start() }
                 }
 
-                Button {
+                StyledButton {
                     text: "Stop"
-                    Layout.fillWidth: true
-                    implicitHeight: 40
                     onClicked: runTimer.stop()
                 }
 
