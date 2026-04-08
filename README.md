@@ -124,7 +124,8 @@ although a unit is already present there. I thought of a solution for this which
 I have in the map but that would be too much wasted memory. 
 
 ## Sample Input/Output
-Sample RiskyLab compatible JSON map files are provided in the `testFiles/` directory.Screenshots showing the output of the pathfinding algorithm on these maps are provided in the `output/` directory.
+* Sample RiskyLab compatible JSON map files are provided in the `testFiles/` directory.Screenshots showing the output of the pathfinding algorithm on these maps are provided in the `output/` directory.
+* Screenshots for outputs show the full path trail visible on the grid. This can be reproduced by commenting out the `buildBaseGrid()` call in `advance()` function in `src/gridstate.cpp`.
 
 ## Feedback
 
