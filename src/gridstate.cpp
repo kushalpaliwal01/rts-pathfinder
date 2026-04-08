@@ -99,10 +99,10 @@ void GridState::buildBaseGrid() {
         for (int j = 0; j < m_grid[i].size(); j++) {
             int val = m_grid[i][j];
             auto pos = std::make_pair(i, j);
-            if (m_startSet.count(pos)) m_cells.append(0);
-            else if (m_targetSet.count(pos)) m_cells.append(4);
-            else if (val == IconSet::ELEVATED) m_cells.append(1);
-            else m_cells.append(0);
+            if (m_startSet.count(pos)) m_cells.append(IconSet::OPEN);
+            else if (m_targetSet.count(pos)) m_cells.append(IconSet::TARGET_DISPLAY);
+            else if (val == IconSet::ELEVATED) m_cells.append(IconSet::ELEVATED_DISPLAY);
+            else m_cells.append(IconSet::OPEN);
         }
     }
 }

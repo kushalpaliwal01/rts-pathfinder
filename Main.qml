@@ -24,7 +24,10 @@ Window {
     FileDialog {
         id: fileDialog
         nameFilters: ["JSON files (*.json)"]
-        onAccepted: gameController.loadMap(fileDialog.selectedFile)
+        onAccepted: {
+            runTimer.stop()
+            gameController.loadMap(fileDialog.selectedFile)
+        }
     }
 
     // Timer drives Run mode — fires nextStep() every 100ms until stopped
