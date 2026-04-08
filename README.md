@@ -17,7 +17,9 @@ The application accepts a battlefield map in JSON format compatible with RiskyLa
 * CMake 3.16 or later
 
 ### Steps
-* Open `CMakeLists.txt` in Qt Creator
+* Run git clone https://github.com/kushalpaliwal01/rts-pathfinder.git 
+* Open Qt Creator and select Open Project
+* Navigate to the cloned repository and open `CMakeLists.txt`
 * Select a Qt 6.10+ kit
 * Click the run button
 
