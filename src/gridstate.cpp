@@ -58,7 +58,7 @@ void GridState::advance() {
      *  Rebuild the base grid to reset unit positions from the previous step.
      *  Comment this out to show the full path trail instead of step-by-step movement.
     **/
-    buildBaseGrid();
+    // buildBaseGrid();
     overlayUnits();
     emit cellsChanged();
 }

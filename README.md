@@ -123,6 +123,8 @@ but the target position will only have reserved state till timestep 20. And so `
 although a unit is already present there. I thought of a solution for this which was to have reservations for the start position `s1` for some Maximum timestep which would be around the number of tiles
 I have in the map but that would be too much wasted memory. 
 
+## Sample Input/Output
+Sample RiskyLab compatible JSON map files are provided in the `testFiles/` directory.Screenshots showing the output of the pathfinding algorithm on these maps are provided in the `output/` directory.
 
 ## Feedback
 
