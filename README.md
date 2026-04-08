@@ -124,10 +124,22 @@ both the units will be mapped to the same target. Furthermore, let's say `s1` ta
 but the target position will only have reserved state till timestep 20. And so `s2` although has a target position adjacent to the target cell it could still at timestep 29 acquire the target position 
 although a unit is already present there. I thought of a solution for this which was to have reservations for the start position `s1` for some Maximum timestep which would be around the number of tiles
 I have in the map but that would be too much wasted memory. 
+* Window resizing after a map is loaded can occasionally cause the grid to render 
+incorrectly. Resizing the window again after loading resolves it.
+
 
 ## Sample Input/Output
 * Sample RiskyLab compatible JSON map files are provided in the `testFiles/` directory.Screenshots showing the output of the pathfinding algorithm on these maps are provided in the `output/` directory.
 * Screenshots for outputs show the full path trail visible on the grid. This can be reproduced by commenting out the `buildBaseGrid()` call in `advance()` function in `src/gridstate.cpp`.
+
+## AI Usage
+
+Claude (Anthropic) was used as a development assistant in the following areas:
+* Understanding QML syntax and how the connection between the QML frontend and C++ backend is established via signals, properties and Q_INVOKABLE
+* Understanding the A* algorithm including comparision of the different types of heurisitics and their usecase
+* Debugging and fixing UI glitches 
+* C++ 17 syntax questions
+
 
 ## Feedback
 
